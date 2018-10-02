@@ -10,7 +10,7 @@ namespace DellGuy.DataAccess
     {
         static List<Clinker> _prison = new List<Clinker>();
 
-        public void Add(ClinkerStorage clinker)
+        public void Add(Clinker clinker)
         {
             clinker.Id = _prison.Any() ? _prison.Max(r => r.Id) + 1 : 1;
             _prison.Add(clinker);

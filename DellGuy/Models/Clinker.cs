@@ -7,15 +7,12 @@ namespace DellGuy.Models
 {
     public class Clinker
     {
-        //Services
-        //Name
-        //Interest
-        //Crime
-        //IsLonely
+        public Interests Interests { get; set; }
         public int Id { get; set; }
         public bool IsLonely { get; set; }
         public string  Name { get; set; }
         public string Crime { get; set; }
         List<string> Service = new List<string>();
+        List<int> FriendId = new List<int>();
     }
 }
