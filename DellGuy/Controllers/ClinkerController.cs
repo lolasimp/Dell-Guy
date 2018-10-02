@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DellGuy.DataAccess;
 using DellGuy.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +13,14 @@ namespace DellGuy.Controllers
     [ApiController]
     public class ClinkerController : ControllerBase
     {
-       
+        private readonly ClinkerStorage _clinkerStorage;
+
         static List<Clinker> Clinkers;
-        static ClinkerController()
+
+        public ClinkerController()
         {
+             _clinkerStorage = new ClinkerStorage();
+
             Clinkers = new List<Clinker>
             {
                 new Clinker { Name = "Joe", Interests = Interests.Books, IsLonely = false },
@@ -24,6 +29,7 @@ namespace DellGuy.Controllers
                 new Clinker { Name = "George", Interests = Interests.Board_Games, IsLonely = false },
             };
         }
+
         [HttpGet]
         public ActionResult<IEnumerable<Clinker>> GetAll()
         {
@@ -35,6 +41,13 @@ namespace DellGuy.Controllers
         {
             Clinkers.Add(clinker);
             return Ok();
+        }
+
+        [HttpGet("{id}/services")]
+        public IActionResult getClinkerServices(int id)
+        {
+            var clinker = _clinkerStorage.GetById(id);
+            return Ok(clinker.Service);
         }
     }     
 }
