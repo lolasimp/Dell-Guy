@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DellGuy.DataAccess;
 using DellGuy.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ namespace DellGuy.Controllers
     [ApiController]
     public class ClinkerController : ControllerBase
     {
-       
+
         static List<Clinker> Clinkers;
         static ClinkerController()
         {
@@ -35,6 +36,20 @@ namespace DellGuy.Controllers
         {
             Clinkers.Add(clinker);
             return Ok();
+        }
+
+        [HttpGet("interests")]
+        public ActionResult<IEnumerable<Clinker>> GetClinkerByInterests()
+        {
+            var clinkerInterest = Clinkers.Where(clinker => clinker.Interests == Interests.Books);
+            return Ok(clinkerInterest);
+        }
+
+        [HttpPost("{id}/friends")]
+        public void AddFriend(int id)
+        {
+            var friend = new Friends();
+            friend.AddFriend(Clinkers[1], 7);
         }
     }     
 }
