@@ -13,10 +13,7 @@ namespace DellGuy.Controllers
     [ApiController]
     public class ClinkerController : ControllerBase
     {
-<<<<<<< HEAD
-=======
         private readonly ClinkerStorage _clinkerStorage;
->>>>>>> 948fb9971a291557fc94fa3f5194e1c93b2d8b39
 
         static List<Clinker> Clinkers;
 
@@ -46,7 +43,6 @@ namespace DellGuy.Controllers
             return Ok();
         }
 
-<<<<<<< HEAD
         [HttpGet("interests")]
         public ActionResult<IEnumerable<Clinker>> GetClinkerByInterests()
         {
@@ -59,13 +55,13 @@ namespace DellGuy.Controllers
         {
             var friend = new Friends();
             friend.AddFriend(Clinkers[1], 7);
-=======
+        }
+
         [HttpGet("{id}/services")]
         public IActionResult getClinkerServices(int id)
         {
             var clinker = _clinkerStorage.GetById(id);
             return Ok(clinker.Service);
->>>>>>> 948fb9971a291557fc94fa3f5194e1c93b2d8b39
         }
     }     
 }
