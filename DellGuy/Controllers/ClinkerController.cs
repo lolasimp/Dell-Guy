@@ -43,10 +43,10 @@ namespace DellGuy.Controllers
             return Ok();
         }
 
-        [HttpGet("interests")]
-        public ActionResult<IEnumerable<Clinker>> GetClinkerByInterests()
+        [HttpGet("interests/{interest}")]
+        public ActionResult<IEnumerable<Clinker>> GetClinkerByInterests(string interest)
         {
-            var clinkerInterest = Clinkers.Where(clinker => clinker.Interests == Interests.Books);
+            var clinkerInterest = Clinkers.Where(clinker => clinker.Interests.ToString() == interest);
             return Ok(clinkerInterest);
         }
 
