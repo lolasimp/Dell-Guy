@@ -63,5 +63,12 @@ namespace DellGuy.Controllers
             var clinker = _clinkerStorage.GetById(id);
             return Ok(clinker.Service);
         }
+
+        [HttpGet("{id}/enemies")]
+        public IActionResult getEnemies(int id)
+        {
+            var clinker = _clinkerStorage.GetById(id);
+            return Ok(clinker.EnemyIds);
+        }
     }     
 }
