@@ -23,7 +23,7 @@ namespace DellGuy.Controllers
 
             Clinkers = new List<Clinker>
             {
-                new Clinker { Name = "Joe", Interests = Interests.Books, IsLonely = false },
+                new Clinker { Name = "Joe", Interests = Interests.Books, IsLonely = false, Service = { "shoe shining" } },
                 new Clinker { Name = "Jim", Interests = Interests.Board_Games, IsLonely = false },
                 new Clinker { Name = "Bob", Interests = Interests.Books, IsLonely = false },
                 new Clinker { Name = "George", Interests = Interests.Board_Games, IsLonely = false },
