@@ -8,7 +8,10 @@ namespace DellGuy.DataAccess
 {
     public class ClinkerStorage
     {
-        static List<Clinker> _prison = new List<Clinker>();
+        static List<Clinker> _prison = new List<Clinker>()
+        {
+            new Clinker { Name = "Joe", Interests = Interests.Books, IsLonely = false, Service = { "shoe shining" } }
+        };
 
         public void Add(Clinker clinker)
         {
