@@ -12,5 +12,10 @@ namespace DellGuy.Models
         //Interest
         //Crime
         //IsLonely
+        public int Id { get; set; }
+        public bool IsLonely { get; set; }
+        public string  Name { get; set; }
+        public string Crime { get; set; }
+        List<string> Service = new List<string>();
     }
 }
