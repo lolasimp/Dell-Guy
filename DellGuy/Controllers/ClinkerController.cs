@@ -12,16 +12,29 @@ namespace DellGuy.Controllers
     [ApiController]
     public class ClinkerController : ControllerBase
     {
-        Clinkers = new List<Clinker>
+       
+        static List<Clinker> Clinkers;
         static ClinkerController()
-
         {
-            new Clinker { Name = "Joe", Interests = Interests.Books, IsLonely = false };
-            new Clinker { Name = "Jim", Interests = Interests.Board_Games, IsLonely = false };
-            new Clinker { Name = "Bob", Interests = Interests.Books, IsLonely = false };
-            new Clinker { Name = "George", Interests = Interests.Board_Games, IsLonely = false };
+            Clinkers = new List<Clinker>
+            {
+                new Clinker { Name = "Joe", Interests = Interests.Books, IsLonely = false },
+                new Clinker { Name = "Jim", Interests = Interests.Board_Games, IsLonely = false },
+                new Clinker { Name = "Bob", Interests = Interests.Books, IsLonely = false },
+                new Clinker { Name = "George", Interests = Interests.Board_Games, IsLonely = false },
+            };
         }
-    }
-        
-    }
+        [HttpGet]
+        public ActionResult<IEnumerable<Clinker>> GetAll()
+        {
+            return Clinkers;
+        }
+
+        [HttpPost]
+        public IActionResult JoinClinked(Clinker clinker)
+        {
+            Clinkers.Add(clinker);
+            return Ok();
+        }
+    }     
 }
