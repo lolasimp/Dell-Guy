@@ -14,5 +14,6 @@ namespace DellGuy.Models
         public string Crime { get; set; }
         public List<string> Service = new List<string>();
         public List<int> FriendId = new List<int>();
+        public List<Clinker> FriendList = new List<Clinker>();
     }
 }
