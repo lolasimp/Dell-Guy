@@ -13,48 +13,52 @@ namespace DellGuy.Controllers
     [ApiController]
     public class ClinkerController : ControllerBase
     {
-        private readonly ClinkerStorage _clinkerStorage;
 
-        static List<Clinker> Clinkers;
+        private readonly ClinkerStorage _clinkerStorage;
 
         public ClinkerController()
         {
              _clinkerStorage = new ClinkerStorage();
-
-            Clinkers = new List<Clinker>
-            {
-                new Clinker { Name = "Joe", Interests = Interests.Books, IsLonely = false, Service = { "shoe shining" } },
-                new Clinker { Name = "Jim", Interests = Interests.Board_Games, IsLonely = false },
-                new Clinker { Name = "Bob", Interests = Interests.Books, IsLonely = false },
-                new Clinker { Name = "George", Interests = Interests.Board_Games, IsLonely = false },
-            };
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<Clinker>> GetAll()
         {
-            return Clinkers;
+            return _clinkerStorage._prison;
         }
 
         [HttpPost]
         public IActionResult JoinClinked(Clinker clinker)
         {
-            Clinkers.Add(clinker);
+            _clinkerStorage._prison.Add(clinker);
             return Ok();
         }
-
+         
+        // when call the api, {interest} needs to be interest string like Books
         [HttpGet("interests/{interest}")]
         public ActionResult<IEnumerable<Clinker>> GetClinkerByInterests(string interest)
         {
-            var clinkerInterest = Clinkers.Where(clinker => clinker.Interests.ToString() == interest);
+            var clinkerInterest = _clinkerStorage._prison.Where(clinker => clinker.Interests.ToString() == interest);
             return Ok(clinkerInterest);
         }
 
-        [HttpPost("{id}/friends")]
-        public void AddFriend(int id)
+        //[HttpPost("{id}/friends")]
+        //public void AddFriend(int id)
+        //{
+        //    var friend = new Friends();
+        //    friend.AddFriend(Clinkers[1], 7);
+        //}
+        [HttpPut("{myId}/{friendId}")]
+        public IActionResult AddFriendToList(int myId, int friendId)
         {
-            var friend = new Friends();
-            friend.AddFriend(Clinkers[1], 7);
+            var clinker = _clinkerStorage.GetById(myId);
+            var friend = _clinkerStorage.GetById(friendId);
+
+
+            if (clinker == null) return NotFound();
+
+            clinker.FriendList.Add(friend);
+            return Ok();
         }
 
         [HttpGet("{id}/services")]
@@ -62,6 +66,7 @@ namespace DellGuy.Controllers
         {
             var clinker = _clinkerStorage.GetById(id);
             return Ok(clinker.Service);
+
         }
 
         [HttpGet("{id}/enemies")]
