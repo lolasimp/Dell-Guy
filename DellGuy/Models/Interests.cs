@@ -9,6 +9,9 @@ namespace DellGuy.Models
     public enum Interests
     {
         Board_Games,
-        Books
+        Books, 
+        Tattoos,
+        Music,
+        Food
     }
 }

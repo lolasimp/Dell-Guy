@@ -13,13 +13,9 @@ namespace DellGuy.Controllers
     [ApiController]
     public class ClinkerController : ControllerBase
     {
-<<<<<<< HEAD
 
         private readonly ClinkerStorage _clinkerStorage;
 
-=======
-        private readonly ClinkerStorage _clinkerStorage;
->>>>>>> 8a77dcf265623ca0e2d410cb49070e08a71279cd
 
         static List<Clinker> Clinkers;
 
@@ -30,9 +26,9 @@ namespace DellGuy.Controllers
             Clinkers = new List<Clinker>
             {
                 new Clinker { Name = "Joe", Interests = Interests.Books, IsLonely = false, Service = { "shoe shining" } },
-                new Clinker { Name = "Jim", Interests = Interests.Board_Games, IsLonely = false },
+                new Clinker { Name = "Jim", Interests = Interests.Board_Games, IsLonely = true },
                 new Clinker { Name = "Bob", Interests = Interests.Books, IsLonely = false },
-                new Clinker { Name = "George", Interests = Interests.Board_Games, IsLonely = false },
+                new Clinker { Name = "George", Interests = Interests.Board_Games, IsLonely = true },
             };
         }
 
@@ -49,14 +45,8 @@ namespace DellGuy.Controllers
             return Ok();
         }
 
-<<<<<<< HEAD
-
-        [HttpGet("interests")]
-        public ActionResult<IEnumerable<Clinker>> GetClinkerByInterests()
-=======
         [HttpGet("interests/{interest}")]
         public ActionResult<IEnumerable<Clinker>> GetClinkerByInterests(string interest)
->>>>>>> 8a77dcf265623ca0e2d410cb49070e08a71279cd
         {
             var clinkerInterest = Clinkers.Where(clinker => clinker.Interests.ToString() == interest);
             return Ok(clinkerInterest);
@@ -68,19 +58,12 @@ namespace DellGuy.Controllers
             var friend = new Friends();
             friend.AddFriend(Clinkers[1], 7);
         }
-<<<<<<< HEAD
-=======
 
->>>>>>> 8a77dcf265623ca0e2d410cb49070e08a71279cd
         [HttpGet("{id}/services")]
         public IActionResult getClinkerServices(int id)
         {
             var clinker = _clinkerStorage.GetById(id);
             return Ok(clinker.Service);
-<<<<<<< HEAD
-
-=======
->>>>>>> 8a77dcf265623ca0e2d410cb49070e08a71279cd
         }
 
         [HttpGet("{id}/enemies")]
@@ -96,5 +79,23 @@ namespace DellGuy.Controllers
 
             return Ok(enemies);
         }
+
+        [HttpPut("{id}/interests")]
+        public IActionResult UpdateClinkerInterests(int id)
+        {
+            //var clinkerInt = _clinkerStorage.GetById(id).Interests;
+            //foreach(var interest in Enum.GetValues(typeof(Interests)))
+            //{
+            //    clinkerInt.(_clinkerStorage.GetById(id).Interests);
+            //}
+
+            var clinkerInt = Enum
+                 .GetValues(typeof(Interests))
+                 .Cast<Interests>().Where(interests => interests != Interests.Board_Games)
+                 .ToArray();
+            return Ok();
+
+        }
+
     }     
 }
