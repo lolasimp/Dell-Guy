@@ -68,7 +68,14 @@ namespace DellGuy.Controllers
         public IActionResult getEnemies(int id)
         {
             var clinker = _clinkerStorage.GetById(id);
-            return Ok(clinker.EnemyIds);
+            var enemies = new List<Clinker>();
+
+            foreach (var enemyId in clinker.EnemyIds)
+            {                
+                 enemies.Add(_clinkerStorage.GetById(enemyId));
+            }
+
+            return Ok(enemies);
         }
     }     
 }
