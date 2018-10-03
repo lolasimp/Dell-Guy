@@ -13,6 +13,7 @@ namespace DellGuy.Controllers
     [ApiController]
     public class ClinkerController : ControllerBase
     {
+
         private readonly ClinkerStorage _clinkerStorage;
 
         public ClinkerController()
@@ -32,8 +33,7 @@ namespace DellGuy.Controllers
             _clinkerStorage._prison.Add(clinker);
             return Ok();
         }
-         
-        // when call the api, {interest} needs to be interest string like Books
+
         [HttpGet("interests/{interest}")]
         public ActionResult<IEnumerable<Clinker>> GetClinkerByInterests(string interest)
         {
@@ -41,12 +41,6 @@ namespace DellGuy.Controllers
             return Ok(clinkerInterest);
         }
 
-        //[HttpPost("{id}/friends")]
-        //public void AddFriend(int id)
-        //{
-        //    var friend = new Friends();
-        //    friend.AddFriend(Clinkers[1], 7);
-        //}
         [HttpPut("{myId}/{friendId}")]
         public IActionResult AddFriendToList(int myId, int friendId)
         {
@@ -65,6 +59,20 @@ namespace DellGuy.Controllers
         {
             var clinker = _clinkerStorage.GetById(id);
             return Ok(clinker.Service);
+        }
+
+        [HttpGet("{id}/enemies")]
+        public IActionResult getEnemies(int id)
+        {
+            var clinker = _clinkerStorage.GetById(id);
+            var enemies = new List<Clinker>();
+
+            foreach (var enemyId in clinker.EnemyIds)
+            {                
+                 enemies.Add(_clinkerStorage.GetById(enemyId));
+            }
+
+            return Ok(enemies);
         }
     }     
 }
