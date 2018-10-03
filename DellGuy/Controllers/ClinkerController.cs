@@ -66,5 +66,6 @@ namespace DellGuy.Controllers
             var clinker = _clinkerStorage.GetById(id);
             return Ok(clinker.Service);
         }
+
     }     
 }
