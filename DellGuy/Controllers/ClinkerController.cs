@@ -13,6 +13,7 @@ namespace DellGuy.Controllers
     [ApiController]
     public class ClinkerController : ControllerBase
     {
+
         private readonly ClinkerStorage _clinkerStorage;
 
         public ClinkerController()
@@ -65,6 +66,21 @@ namespace DellGuy.Controllers
         {
             var clinker = _clinkerStorage.GetById(id);
             return Ok(clinker.Service);
+
+        }
+
+        [HttpGet("{id}/enemies")]
+        public IActionResult getEnemies(int id)
+        {
+            var clinker = _clinkerStorage.GetById(id);
+            var enemies = new List<Clinker>();
+
+            foreach (var enemyId in clinker.EnemyIds)
+            {                
+                 enemies.Add(_clinkerStorage.GetById(enemyId));
+            }
+
+            return Ok(enemies);
         }
 
     }     
