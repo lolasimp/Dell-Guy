@@ -12,6 +12,7 @@ namespace DellGuy.Models
         public bool IsLonely { get; set; }
         public string  Name { get; set; }
         public string Crime { get; set; }
+        public int DaysSentenced { get; set; }
         public List<string> Service = new List<string>();
         public List<int> FriendId = new List<int>();
         public List<Clinker> FriendList = new List<Clinker>();

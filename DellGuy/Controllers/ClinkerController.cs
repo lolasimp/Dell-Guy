@@ -83,5 +83,11 @@ namespace DellGuy.Controllers
             return Ok(enemies);
         }
 
+        [HttpGet("{id}/sentence")]
+        public IActionResult getDaysLeft(int id)
+        {
+            var clinker = _clinkerStorage.GetById(id);
+            return Ok(clinker.DaysSentenced);
+        }
     }     
 }
