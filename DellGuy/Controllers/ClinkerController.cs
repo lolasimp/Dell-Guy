@@ -13,13 +13,11 @@ namespace DellGuy.Controllers
     [ApiController]
     public class ClinkerController : ControllerBase
     {
-        private readonly ClinkerStorage _clinkerStorage;
-
-        static List<Clinker> Clinkers;
+        private readonly ClinkerStorage _clinkerStorage; 
 
         public ClinkerController()
         {
-             _clinkerStorage = new ClinkerStorage();
+            _clinkerStorage = new ClinkerStorage();
         }
 
         [HttpGet]
@@ -34,7 +32,7 @@ namespace DellGuy.Controllers
             _clinkerStorage._prison.Add(clinker);
             return Ok();
         }
-        
+
         [HttpGet("interests/{interest}")]
         public ActionResult<IEnumerable<Clinker>> GetClinkerByInterests(string interest)
         {
@@ -42,12 +40,6 @@ namespace DellGuy.Controllers
             return Ok(clinkerInterest);
         }
 
-        //[HttpPost("{id}/friends")]
-        //public void AddFriend(int id)
-        //{
-        //    var friend = new Friends();
-        //    friend.AddFriend(Clinkers[1], 7);
-        //}
         [HttpPut("{myId}/{friendId}")]
         public IActionResult AddFriendToList(int myId, int friendId)
         {
@@ -75,8 +67,8 @@ namespace DellGuy.Controllers
             var enemies = new List<Clinker>();
 
             foreach (var enemyId in clinker.EnemyIds)
-            {                
-                 enemies.Add(_clinkerStorage.GetById(enemyId));
+            {
+                enemies.Add(_clinkerStorage.GetById(enemyId));
             }
 
             return Ok(enemies);
@@ -87,6 +79,14 @@ namespace DellGuy.Controllers
         {
             var clinker = _clinkerStorage.GetById(id);
             return Ok(clinker.DaysSentenced);
+        }
+
+        [HttpDelete("{id}/interests/{interest}")]
+        public IActionResult deleteInterest(int id, string interest)
+        {
+            var clinker = _clinkerStorage.GetById(id);
+            clinker.Interests.Remove(interest);
+            return Ok(clinker);
         }
     }     
 }
