@@ -15,7 +15,7 @@ namespace DellGuy.Models
         public int DaysSentenced { get; set; }
         public List<string> Service = new List<string>();
         public List<int> FriendId = new List<int>();
-        public List<Clinker> FriendList = new List<Clinker>();
+        public List<int> FriendList = new List<int>();
         public List<int> EnemyIds = new List<int>();
     }
 }
