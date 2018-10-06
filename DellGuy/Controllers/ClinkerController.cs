@@ -27,10 +27,18 @@ namespace DellGuy.Controllers
         }
 
         [HttpPost]
+        // {"name": "Joe","isLonely": true}
         public IActionResult JoinClinked(Clinker clinker)
         {
-            _clinkerStorage._prison.Add(clinker);
-            return Ok();
+            if (clinker.IsLonely)
+            {
+                _clinkerStorage.Add(clinker);
+                return Content("A new clinker join the network");
+            }
+            else
+            {
+                return Content("You are not lonely,so...F**K OFF!");
+            }
         }
 
         [HttpGet("interests/{interest}")]
