@@ -42,23 +42,23 @@ namespace DellGuy.Controllers
             return Ok(clinkerInterest);
         }
 
-        //[HttpPost("{id}/friends")]
-        //public void AddFriend(int id)
-        //{
-        //    var friend = new Friends();
-        //    friend.AddFriend(Clinkers[1], 7);
-        //}
-        [HttpPut("{myId}/{friendId}")]
-        public IActionResult AddFriendToList(int myId, int friendId)
+        [HttpPut("{myId}/AddFriend/{friendId}")]
+        //https:///localhost:44334/api/Clinker/1/AddFriend/2
+        public IActionResult AddFriend(int myId, int friendId)
         {
-            var clinker = _clinkerStorage.GetById(myId);
+            var me = _clinkerStorage.GetById(myId);
             var friend = _clinkerStorage.GetById(friendId);
 
-
-            if (clinker == null) return NotFound();
-
-            clinker.FriendList.Add(friend);
-            return Ok();
+            if (me.FriendList.Contains(friendId))
+            {
+                return Content("This clinker is already your friend.");
+            }
+            else
+            {
+                me.FriendList.Add(friendId);
+                friend.FriendList.Add(myId);
+                return Content("New friend is added.");
+            }
         }
 
         [HttpGet("{id}/services")]
@@ -87,6 +87,24 @@ namespace DellGuy.Controllers
         {
             var clinker = _clinkerStorage.GetById(id);
             return Ok(clinker.DaysSentenced);
+        }
+
+        [HttpPut("{myId}/PotentialCrew")]
+        public ActionResult<IEnumerable<Clinker>> ListFriendsFriend(int myId)
+        {
+            var me = _clinkerStorage.GetById(myId);
+
+            // return [[2,3]]
+            var myFriends = from clinker in _clinkerStorage._prison
+                            where clinker.Id == myId
+                            select clinker.FriendList;
+
+            // return clinkers that are in myFriends list
+            var friendsFriend = from clinker in _clinkerStorage._prison
+                                where myFriends.Single().Contains(clinker.Id)
+                                select clinker;
+
+            return Ok(friendsFriend);
         }
     }     
 }

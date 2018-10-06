@@ -13,10 +13,37 @@ namespace DellGuy.DataAccess
         public ClinkerStorage()
         {
             _prison = new List<Clinker> {
-                new Clinker { Id = 1, Name = "Joe", Interests = Interests.Books, IsLonely = false, Service = { "shoe shining" } },
-                new Clinker { Id = 2, Name = "Jim", Interests = Interests.Board_Games, IsLonely = false },
-                new Clinker { Id = 3, Name = "Bob", Interests = Interests.Books, IsLonely = false },
-                new Clinker { Id = 4, Name = "George", Interests = Interests.Board_Games, IsLonely = false },
+                new Clinker
+                {
+                    Id = 1,
+                    Name = "Joe",
+                    Interests = Interests.Books,
+                    IsLonely = false,
+                    Service = { "shoe shining" },
+                    FriendList = { 2, 3 }
+                    
+                },
+                new Clinker
+                {
+                    Id = 2,
+                    Name = "Jim",
+                    Interests = Interests.Board_Games,
+                    IsLonely = false
+                },
+                new Clinker
+                {
+                    Id = 3,
+                    Name = "Bob",
+                    Interests = Interests.Books,
+                    IsLonely = false
+                },
+                new Clinker
+                {
+                    Id = 4,
+                    Name = "George",
+                    Interests = Interests.Board_Games,
+                    IsLonely = false
+                },
             };
 
         }
