@@ -20,7 +20,7 @@ namespace DellGuy.DataAccess
                     Name = "Joe",
                     Interests = Interests.Books,
                     IsLonely = false,
-                    Service = { "shoe shining" },
+                    Service = { "haircut"},
                     FriendList = { 2, 3 }
                     
                 },
@@ -36,6 +36,7 @@ namespace DellGuy.DataAccess
                     Id = 3,
                     Name = "Bob",
                     Interests = Interests.Books,
+                    Service = {"cooking"},
                     IsLonely = false
                 },
                 new Clinker

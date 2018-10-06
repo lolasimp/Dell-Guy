@@ -91,18 +91,18 @@ namespace DellGuy.Controllers
         }
 
 
-        [HttpDelete("{id}/deleteservices")]
-        public IActionResult deleteClinkerServices(int id)
+        [HttpDelete("{id}/service/{services}")]
+        public IActionResult deleteClinkerServices(int id, string services)
         {
             var clinker = _clinkerStorage.GetById(id);
-            return Ok(clinker.Service.Remove(item: "shoe shining"));
+            return Ok(clinker.Service.Remove(services));
         }
 
-        [HttpPut("{id}/newservices")]
-        public IActionResult updateService(int id)
+        [HttpPut("{id}/services/{services}")]
+        public IActionResult updateService(int id, string services)
         {
             var clinkerServices = _clinkerStorage.GetById(id);
-            clinkerServices.Service = new List<string> { "tasks" };
+            clinkerServices.Service = new List<string> { services };
             return Ok(clinkerServices.Service);
 
         }
