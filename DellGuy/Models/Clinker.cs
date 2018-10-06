@@ -7,6 +7,7 @@ namespace DellGuy.Models
 {
     public class Clinker
     {
+        public List<string> Interests = new List<string>();
         public int Id { get; set; }
         public bool IsLonely { get; set; }
         public string Name { get; set; }
@@ -16,7 +17,5 @@ namespace DellGuy.Models
         public List<int> FriendId = new List<int>();
         public List<int> FriendList = new List<int>();
         public List<int> EnemyIds = new List<int>();
-        public Interests Interests { get; set; }
-
     }
 }

@@ -44,7 +44,7 @@ namespace DellGuy.Controllers
         [HttpGet("interests/{interest}")]
         public ActionResult<IEnumerable<Clinker>> GetClinkerByInterests(string interest)
         {
-            var clinkerInterest = _clinkerStorage._prison.Where(clinker => clinker.Interests.ToString() == interest);
+            var clinkerInterest = _clinkerStorage._prison.FindAll(clinker => clinker.Interests.Contains(interest));
             return Ok(clinkerInterest);
         }
 
@@ -98,7 +98,22 @@ namespace DellGuy.Controllers
             return Ok(clinker.DaysSentenced);
         }
 
+        [HttpDelete("{id}/interests/{interest}")]
+        public IActionResult deleteInterest(int id, string interest)
+        {
+            var clinker = _clinkerStorage.GetById(id);
+            clinker.Interests.Remove(interest);
+            return Ok(clinker.Interests);
+        }
 
+        [HttpPut("{id}/interests/{interest}")]
+        public IActionResult updateInterests(int id, string interest)
+        {
+            var clinker = _clinkerStorage.GetById(id);
+            clinker.Interests.Add(interest);
+            return Ok(clinker.Interests);
+        }
+         
         [HttpDelete("{id}/service/{services}")]
         public IActionResult deleteClinkerServices(int id, string services)
         {
