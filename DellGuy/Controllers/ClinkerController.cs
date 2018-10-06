@@ -36,7 +36,7 @@ namespace DellGuy.Controllers
         [HttpGet("interests/{interest}")]
         public ActionResult<IEnumerable<Clinker>> GetClinkerByInterests(string interest)
         {
-            var clinkerInterest = _clinkerStorage._prison.Where(clinker => clinker.Interests.ToString() == interest);
+            var clinkerInterest = _clinkerStorage._prison.FindAll(clinker => clinker.Interests.Contains(interest));
             return Ok(clinkerInterest);
         }
 
