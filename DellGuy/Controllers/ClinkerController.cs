@@ -86,7 +86,15 @@ namespace DellGuy.Controllers
         {
             var clinker = _clinkerStorage.GetById(id);
             clinker.Interests.Remove(interest);
-            return Ok(clinker);
+            return Ok(clinker.Interests);
+        }
+
+        [HttpPut("{id}/interests/{interest}")]
+        public IActionResult updateInterests(int id, string interest)
+        {
+            var clinker = _clinkerStorage.GetById(id);
+            clinker.Interests.Add(interest);
+            return Ok(clinker.Interests);
         }
     }     
 }
