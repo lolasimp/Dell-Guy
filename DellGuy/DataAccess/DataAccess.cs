@@ -10,6 +10,7 @@ namespace DellGuy.DataAccess
     {
         public List<Clinker> _prison;
 
+        //prisoner storage
         public ClinkerStorage()
         {
             _prison = new List<Clinker> {
